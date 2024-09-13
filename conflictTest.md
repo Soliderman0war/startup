@@ -1,3 +1,1 @@
-Add some lines here for spice
-S?
-add some lines but with github you know
+I could only accept one side of things people becasue they were so different
