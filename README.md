@@ -18,7 +18,7 @@ Many people in their lives want to change or improve. However, they don't know h
   
 
 ### Description of Technology
-1. HTML - Two HTML pages for the login as well as the activity selection page. Hyperlinks are used on activities that would bring you to a specific acitivty page.
+1. HTML - Two HTML pages for the login as well as the activity selection page. Hyperlinks are used on activities that would bring you to a specific activity page.
 2. CSS - Styling that looks good on different screen sizes, uses good color choices as well as splitting the content evenly. Animating different interactions
 3. JavaScript - Provides login, dropdown menus, loads in content automatically when the acivity is selected
 4. React - Application will react according to user action
