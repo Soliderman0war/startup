@@ -9,21 +9,31 @@ Many people in their lives want to change or improve. However, they don't know h
 ## Website
 ### Key features
 * A login feature
-  Randomize selection button
-  selection drop down
-  timer
-  databank of activities to pull from
-  Completed acivities if logged in
+* Randomize selection button
+* selection drop down
+* timer
+* databank of activities to pull from
+* Completed acivities if logged in
   
 
 ### Description of Technology
-HTML - Uses correct HTML structure for application. Two HTML pages. One for login and one for voting. Hyperlinks to choice artifact.
-CSS - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
-JavaScript - Provides login, choice display, applying votes, display other users votes, backend endpoint calls.
-React - 
-Service - 
-DB/Login - 
-WebSocket - 
+1. HTML - Two HTML pages for the login as well as the activity selection page. Hyperlinks are used on activities that would bring you to a specific acitivty page.
+2. CSS - Styling that looks good on different screen sizes, uses good color choices as well as splitting the content evenly. Animating different interactions
+3. JavaScript - Provides login, dropdown menus, loads in content automatically when the acivity is selected
+4. React - Application will react according to user action
+5. Service - Backend service for
+     * completing acitivties
+     * retrieving acitivies
+     * display the acitivity
+     * allow youtube functionality using [https://developers.google.com/youtube/](https://developers.google.com/youtube/) api service
+7. DB/Login - Store users and activities in databases. Register and login users. Securely stored Credentials.
+8. WebSocket - Comparing user completion rate of acivities as they are completed (if deemed necessary to use) 
 
 ### Sketches
-images go here
+![image of page with activity](https://github.com/user-attachments/assets/73e6d999-6ead-4107-8e09-ae061d134bd5)
+
+![image of login page](https://github.com/user-attachments/assets/8d372585-497b-4fdb-abb4-83c4733df61c)
+
+
+
+
