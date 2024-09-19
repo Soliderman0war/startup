@@ -3,3 +3,5 @@
 I was able to understand a bit more about merging and the conflict that happens.
 Now I gotta learn how to link this for readme
 
+## HTML
+Learned quite a bit on the different uses that html provides and finished assignments accordingly
