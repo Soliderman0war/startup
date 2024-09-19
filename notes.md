@@ -5,3 +5,6 @@ Now I gotta learn how to link this for readme
 
 ## HTML
 Learned quite a bit on the different uses that html provides and finished assignments accordingly
+For Example
+ - <a> hyperlink
+ - use embed code for videos like youtube
