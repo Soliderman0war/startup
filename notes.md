@@ -8,3 +8,6 @@ Learned quite a bit on the different uses that html provides and finished assign
 For Example
  - <a> hyperlink
  - use embed code for videos like youtube
+
+## HTTPS / CADDY
+Understood how to get a secure connection and lease a domain off of aws (view hosted zones allows the create records button)
