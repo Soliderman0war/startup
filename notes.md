@@ -11,3 +11,6 @@ For Example
 
 ## HTTPS / CADDY
 Understood how to get a secure connection and lease a domain off of aws (view hosted zones allows the create records button)
+
+##CSS
+You can call different styles like background, padding, margin, borders and even animations can be added
