@@ -8,6 +8,10 @@ Startup for BYU class cs260
 Many people in their lives want to change or improve. However, they don't know how to start or sometimes even what to start on. I am proposing to create a website that selects an acitvity to do in 15 minutes to improve slightly each day. People can sign in and ultize it as they keep track on what they improved on, as well as select an activity again to improve further. If they are unsure what to do then they can use the random option to get one selected for them.
 
 ## Website
+### HTML What was add and modified
+I am just using the one page so it has the space for the activity, with the buttons for completed activity and randomize. I has the logo, home, login and a dropdown for activities
+
+
 ### Key features
 * A login feature
 * Randomize selection button
