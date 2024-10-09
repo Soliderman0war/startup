@@ -4,7 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activity Page</title>
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 24px;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+        }
+
+        .dark-mode-toggle label {
+            margin-right: 5px;
+        }
+
+        .dropdown {
+            margin: 20px 0;
+        }
+
+        .activity-space {
+            width: 70%;
+            height: 300px;
+            border: 2px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .activity-space p {
+            color: #999;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 <body>
 
     <header>
@@ -37,6 +122,15 @@
             <button>Randomize</button>
         </div>
     </div>
+
+    <footer style="background-color: #f0f0f0; padding: 10px; text-align: center; position: fixed; bottom: 0; width: 100%; box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);">
+        <p>
+            Check out the project on Drake Mueller's
+            <a href="https://github.com/Soliderman0war/startup" target="_blank" style="color: #007BFF; text-decoration: none;">
+                GitHub
+            </a>.
+        </p>
+    </footer>
 
 </body>
 </html>
