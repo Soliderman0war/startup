@@ -8,9 +8,6 @@ Startup for BYU class cs260
 Many people in their lives want to change or improve. However, they don't know how to start or sometimes even what to start on. I am proposing to create a website that selects an acitvity to do in 15 minutes to improve slightly each day. People can sign in and ultize it as they keep track on what they improved on, as well as select an activity again to improve further. If they are unsure what to do then they can use the random option to get one selected for them.
 
 ## Website
-### HTML What was add and modified
-I am just using the one page so it has the space for the activity, with the buttons for completed activity and randomize. I has the logo, home, login and a dropdown for activities
-
 
 ### Key features
 * A login feature
@@ -39,6 +36,16 @@ I am just using the one page so it has the space for the activity, with the butt
 
 ![image of login page](https://github.com/user-attachments/assets/8d372585-497b-4fdb-abb4-83c4733df61c)
 
+
+## HTML deliverable
+For this deliverable I built the structure using HTML
+ [x] HTML pages - two HTML pages that represent the login and activity page
+ [x] Links - The login pages links to the activity page
+ [x] Text - Each Activity is represented by text for now
+ [x] Images - Image for motivation
+ [x] DB/Login - Has the inputs and sumbit for login, activities completed will be pulled from database
+ [x] WebSocket - The count of highest completed acitivies is shown in realtime
+  
 
 
 
