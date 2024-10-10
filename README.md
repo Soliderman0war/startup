@@ -39,12 +39,12 @@ Many people in their lives want to change or improve. However, they don't know h
 
 ## HTML deliverable
 For this deliverable I built the structure using HTML
- [x] HTML pages - two HTML pages that represent the login and activity page
- [x] Links - The login pages links to the activity page
- [x] Text - Each Activity is represented by text for now
- [x] Images - Image for motivation
- [x] DB/Login - Has the inputs and sumbit for login, activities completed will be pulled from database
- [x] WebSocket - The count of highest completed acitivies is shown in realtime
+ - [x] HTML pages - two HTML pages that represent the login and activity page
+ - [x] Links - The login pages links to the activity page
+ - [x] Text - Each Activity is represented by text for now
+ - [x] Images - Image for motivation
+ - [x] DB/Login - Has the inputs and sumbit for login, activities completed will be pulled from database
+ - [x] WebSocket - The count of highest completed acitivies is shown in realtime
   
 
 
