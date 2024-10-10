@@ -44,7 +44,7 @@ For this deliverable I built the structure using HTML
  - [x] Text - Each Activity is represented by text for now
  - [x] Images - Image for motivation
  - [x] DB/Login - Has the inputs and sumbit for login, activities completed will be pulled from database
- - [x] WebSocket - The count of highest completed acitivies is shown in realtime
+ - [x] WebSocket - The count of highest completed acitivies will be shown in realtime
   
 
 
