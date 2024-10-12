@@ -7,6 +7,8 @@ Now I gotta learn how to link this for readme
  - got footers down better
  - got the hyperlink usage down
  - input boxes were fun
+ - used to percentages for placing objects so that it fits the page well
+ - understood how different styles commands can conflict with one another
 
 ## HTML
 Learned quite a bit on the different uses that html provides and finished assignments accordingly
