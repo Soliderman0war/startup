@@ -47,5 +47,13 @@ For this deliverable I built the structure using HTML
  - [x] WebSocket - The count of highest completed acitivies will be shown in realtime
   
 
+## CSS deliverable
+For this deliverable I properly styled the application
+     - [x]  Header, footer, and main content body
+     - [x]  Navigation elements - Bolded to produce important feel for navigation
+     - [x] Responsive to window resizing - capable of being minimized and extended with minimal impact
+     - [x] Application elements - Used proper spacing to have a nice design look
+     - [x] Application text content - Consistent fonts
+     - [x] Application images - Border and look for images to look more professional
 
 
