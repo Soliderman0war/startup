@@ -35,11 +35,17 @@
         }
 
         main {
-            display: flex;
-            flex-direction: row;
+            position: absolute;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: fit-content;
+            margin: auto;
+            top: 50%;
+            right: 50%;
+            left: 45%;
+            bottom: 45%;
+            
+            
 
         }
 
@@ -81,7 +87,7 @@
         }
 
         .welcome-message {
-            display: none;
+            display: flex;
             background-color: white;
             padding: 20px;
             border-radius: 10px;
