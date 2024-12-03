@@ -5,14 +5,16 @@ const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
     // replace this with real authentication logic.
     if (username === "user" && password === "password") {
-      navigate("/"); // Redirect to Home page.
+      setError("");
+      navigate("/");
     } else {
-      alert("Invalid username or password.");
+      setError("Incorrect username or password.");
     }
   };
   return (
@@ -32,6 +34,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
+        {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
       </form>
     </div>
   );

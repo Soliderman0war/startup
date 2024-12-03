@@ -1,4 +1,5 @@
-import Header from '/components/Header.jsx';
+import Header from './components/Header.jsx';
+import './Index.css';
 
 const Home = () => {
   return (
@@ -22,6 +23,19 @@ const Home = () => {
           <button>Confirm Activity</button>
         </div>
       </div>
+      <footer>
+        <p>
+          Check out the project on Drake Mueller's{" "}
+          <a
+            href="https://github.com/Soliderman0war/startup"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+      </footer>
     </>
   );
 };
