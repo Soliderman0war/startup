@@ -55,7 +55,7 @@ const Signup = () => {
       </header>
       <main className={styles.main}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <h2>Signup</h2>
+          <h2>Sign up</h2>
           {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
           {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
           <input
@@ -95,7 +95,7 @@ const Signup = () => {
             className={styles.input}
           />
           <button type="submit" className={styles.button}>
-            Signup
+            Sign up
           </button>
         </form>
       </main>

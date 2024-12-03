@@ -13,6 +13,9 @@ const Home = () => {
           <a href="/login" className={styles.navLink}>
             Login
           </a>
+          <a href="/signup" className={styles.navLink}>
+            Signup
+          </a>
         </nav>
         <div className={styles.darkModeToggle}>
           <label htmlFor="darkMode">Dark Mode</label>

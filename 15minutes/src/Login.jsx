@@ -22,6 +22,7 @@ const Login = () => {
         <nav className={styles.nav}>
           <a href="/" className={styles.navLink}>Home</a>
           <a href="/login" className={styles.navLink}>Login</a>
+          <a href="/signup" className={styles.navLink}>Sign up</a>
         </nav>
       </header>
       <main className={styles.main}>
