@@ -2,25 +2,29 @@ import React, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const [timer, setTimer] = useState(900); // 15 minutes in seconds
+  const [timer, setTimer] = useState(900);
+  const [activityCount, setActivityCount] = useState(0);
 
-  // Countdown effect
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => {
         setTimer((prevTimer) => prevTimer - 1);
       }, 1000);
-      return () => clearInterval(interval); // Cleanup on unmount
+      return () => clearInterval(interval);
     }
   }, [timer]);
 
-  // Format timer as mm:ss
+  //mm:ss
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes.toString().padStart(2, "0")}:${secs
       .toString()
       .padStart(2, "0")}`;
+  };
+
+  const handleCompleteActivity = () => {
+    setActivityCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -43,10 +47,10 @@ const Home = () => {
           <input type="checkbox" id="darkMode" />
         </div>
         <div className={styles.highestCount}>
-          <label>highest-count from WebSocket Data</label>
+          <label>Completed Activities: {activityCount}</label>
         </div>
         <div className={styles.timer}>
-          <label>Timer: {formatTime(timer)}</label> {/* Timer displayed here */}
+          <label>Timer: {formatTime(timer)}</label>
         </div>
       </header>
 
@@ -64,7 +68,9 @@ const Home = () => {
         </div>
 
         <div className={styles.buttons}>
-          <button className={styles.button}>Completed Activity</button>
+          <button className={styles.button} onClick={handleCompleteActivity}>
+            Completed Activity
+          </button>
           <button className={styles.button}>Randomize</button>
           <button className={styles.button}>Confirm Activity 3rd Party Caller</button>
         </div>
