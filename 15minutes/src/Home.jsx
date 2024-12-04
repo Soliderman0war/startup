@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Home.module.css";
 
 const Home = () => {
+  const [timer, setTimer] = useState(900); // 15 minutes in seconds
+
+  // Countdown effect
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+      return () => clearInterval(interval); // Cleanup on unmount
+    }
+  }, [timer]);
+
+  // Format timer as mm:ss
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -25,7 +46,7 @@ const Home = () => {
           <label>highest-count from WebSocket Data</label>
         </div>
         <div className={styles.timer}>
-          <label>TIMER</label>
+          <label>Timer: {formatTime(timer)}</label> {/* Timer displayed here */}
         </div>
       </header>
 
@@ -61,6 +82,7 @@ const Home = () => {
             GitHub
           </a>
           .
+          <a title="time icons">Time icons created by Freepik - Flaticon</a>
         </p>
       </footer>
     </div>
