@@ -56,4 +56,14 @@ For this deliverable I properly styled the application
  - [x] Application text content - Consistent fonts
  - [x] Application images - resizing to not induce overwhelming feel and look more professional
 
-
+## React deliverable
+For this deliverable I used JavaScript and React to have the application work for a user with placeholders for items that require API
+ - [x]  Bundled and transpiled - Yep!
+ - [x]  Components - Login, Signup, Completed Activity Count, Buttons for mock API, Timer
+     - [x] Login - Tries to match a registered user with the login and once entered correctly will redirect, No database so use admin/password for now to see it redirect.
+     - [x] Signup - Text boxes and Signup button to signup which will be used with a database later on.
+     - [x] Completed Activity Count - Completed Activity Button will increase count, this will be implemented with Websocket in order to get a correct number across all users.
+     - [x] Buttons to call API - The randomizer and the confirm activty will cause the buttons to call that API but for now it just randomizes which activity to call.
+     - [x] Timer - 15 minutes timer in top right counting down.
+ - [x] Router - Routing between Login, Signup, and Activity Components
+ - [x] Hooks - Home page uses class properties instead of useState or useEffect to track changes in activity state.
