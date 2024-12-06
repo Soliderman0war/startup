@@ -1,28 +1,50 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import styles from "./Header.module.css";
+
+
 const Header = () => {
-    return (
-      <header>
-        <div className="logo">Logo</div>
-        <nav className={styles.nav}>
-        <a href="/" className={styles.navLink}>
+  const [darkMode, setDarkMode] = useState(false);
+
+  
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add(styles.darkMode);
+    } else {
+      document.body.classList.remove(styles.darkMode);
+    }
+  }, [darkMode]);
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.logo}>
+      <img src="./clock.png"/>
+      </div>
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.navLink}>
           Home
-        </a>
-        <a href="/login" className={styles.navLink}>
+        </Link>
+        <Link to="/login" className={styles.navLink}>
           Login
-        </a>
-        <a href="/signup" className={styles.navLink}>
+        </Link>
+        <Link to="/signup" className={styles.navLink}>
           Signup
-        </a>
-        <a href="/about" className={styles.navLink}>
+        </Link>
+        <Link to="/about" className={styles.navLink}>
           About
-        </a>
+        </Link>
       </nav>
-        <div className="dark-mode-toggle">
-          <label htmlFor="darkMode">Dark Mode</label>
-          <input type="checkbox" id="darkMode" />
-        </div>
-      </header>
-    );
-  };
-  
+      <div className={styles.darkModeToggle}>
+        <label htmlFor="darkModeToggle">Dark Mode</label>
+        <input
+          type="checkbox"
+          id="darkModeToggle"
+          checked={darkMode}
+          onChange={() => setDarkMode((prevMode) => !prevMode)}
+        />
+      </div>
+    </header>
+  );
+};
+
 export default Header;
-  

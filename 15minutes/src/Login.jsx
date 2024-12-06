@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
+import Header from "./components/Header";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -18,13 +19,14 @@ const Login = () => {
 
   return (
     <div>
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <nav className={styles.nav}>
           <a href="/" className={styles.navLink}>Home</a>
           <a href="/login" className={styles.navLink}>Login</a>
           <a href="/signup" className={styles.navLink}>Sign up</a>
         </nav>
-      </header>
+      </header> */}
+      <Header />
       <main className={styles.main}>
         <div className={styles.loginContainer}>
           <h2>Login</h2>
@@ -53,6 +55,8 @@ const Login = () => {
           <h2>Welcome, <span id="display-username">{username || "FROM DATABASE"}</span>!</h2>
         </div>
       </footer>
+
+      <script src="darkmode.js"></script>
     </div>
   );
 };

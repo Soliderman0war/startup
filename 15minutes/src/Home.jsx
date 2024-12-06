@@ -5,42 +5,32 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 900, // Initial timer in seconds (15 minutes)
-      activityCount: 0, // Number of completed activities
-      selectedActivity: null, // Randomly selected activity
+      timer: 900,
+      activityCount: 0,
+      currentActivity: null,
     };
-    this.intervalId = null;
-    this.activities = ["Chess", "Juggling", "Future Options with Third Party"];
   }
 
   componentDidMount() {
-    this.startTimer();
+    this.timerInterval = setInterval(() => {
+      const { timer } = this.state;
+      if (timer > 0) {
+        this.setState({ timer: timer - 1 });
+      }
+    }, 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalId); // Clean up interval when component unmounts
+    clearInterval(this.timerInterval);
   }
 
-  startTimer = () => {
-    this.intervalId = setInterval(() => {
-      this.setState((prevState) => {
-        if (prevState.timer > 0) {
-          return { timer: prevState.timer - 1 };
-        } else {
-          clearInterval(this.intervalId); // Stop timer when it reaches 0
-          return { timer: 0 };
-        }
-      });
-    }, 1000);
-  };
-
-  formatTime = (seconds) => {
+  formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes.toString().padStart(2, "0")}:${secs
       .toString()
       .padStart(2, "0")}`;
-  };
+  }
 
   handleCompleteActivity = () => {
     this.setState((prevState) => ({
@@ -49,44 +39,39 @@ class Home extends Component {
   };
 
   handleRandomize = () => {
-    const randomIndex = Math.floor(Math.random() * this.activities.length);
-    const randomActivity = this.activities[randomIndex];
-    this.setState({ selectedActivity: randomActivity });
+    const activities = ["Chess", "Juggling", "Meditation"];
+    const randomActivity =
+      activities[Math.floor(Math.random() * activities.length)];
+    this.setState({ currentActivity: randomActivity });
   };
 
   handleConfirmActivity = () => {
-    const { selectedActivity } = this.state;
-    if (selectedActivity) {
-      alert(`Activity "${selectedActivity}" confirmed! (API call simulated)`);
-      this.setState({ selectedActivity: null });
+    const { currentActivity } = this.state;
+    if (currentActivity) {
+      alert(`Confirmed activity: ${currentActivity}`);
+      this.setState({ currentActivity: null });
     }
   };
 
+
   render() {
-    const { timer, activityCount, selectedActivity } = this.state;
+    const { timer, activityCount, currentActivity, isDarkMode } = this.state;
 
     return (
-      <div className={styles.container}>
+      <div className={isDarkMode ? styles.darkContainer : styles.container}>
         <header className={styles.header}>
-          <div className={styles.logo}>Logo</div>
+          
           <nav className={styles.nav}>
-          <a href="/" className={styles.navLink}>
-            Home
-          </a>
-          <a href="/login" className={styles.navLink}>
-            Login
-          </a>
-          <a href="/signup" className={styles.navLink}>
-            Signup
-          </a>
-          <a href="/about" className={styles.navLink}>
-            About
-          </a>
+            <a href="/" className={styles.navLink}>
+              Home
+            </a>
+            <a href="/login" className={styles.navLink}>
+              Login
+            </a>
+            <a href="/signup" className={styles.navLink}>
+              Signup
+            </a>
           </nav>
-          <div className={styles.darkModeToggle}>
-            <label htmlFor="darkMode">Dark Mode</label>
-            <input type="checkbox" id="darkMode" />
-          </div>
           <div className={styles.highestCount}>
             <label>Completed Activities: {activityCount}</label>
           </div>
@@ -95,35 +80,36 @@ class Home extends Component {
           </div>
         </header>
 
-        <div className={styles.mainContent}>
-          {selectedActivity ? (
-            <div className={styles.selectedActivity}>
-              <h2>{selectedActivity}</h2>
-              <p>Confirm?</p>
+        <main className={styles.main}>
+          <div className={styles.activitySection}>
+            {currentActivity ? (
+              <div className={styles.activityDisplay}>
+                <p>Current Activity: {currentActivity}</p>
+                <button
+                  className={styles.confirmButton}
+                  onClick={this.handleConfirmActivity}
+                >
+                  Confirm Activity
+                </button>
+              </div>
+            ) : (
               <button
-                className={styles.button}
-                onClick={this.handleConfirmActivity}
+                className={styles.randomizeButton}
+                onClick={this.handleRandomize}
               >
-                Confirm
+                Randomize Activity
               </button>
-            </div>
-          ) : (
-            <p className={styles.activityPrompt}>
-              Click "Randomize" to select an activity.
-            </p>
-          )}
-          <div className={styles.buttons}>
+            )}
+          </div>
+          <div className={styles.buttonSection}>
             <button
               className={styles.button}
               onClick={this.handleCompleteActivity}
             >
               Completed Activity
             </button>
-            <button className={styles.button} onClick={this.handleRandomize}>
-              Randomize
-            </button>
           </div>
-        </div>
+        </main>
 
         <footer className={styles.footer}>
           <p>

@@ -1,0 +1,68 @@
+/* Default (Light Mode) Styles */
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+    align-items: left;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .logo {
+    display: flex; 
+    align-items: left;
+    justify-content: left;
+    height: 20px;
+    width: auto;
+  }
+
+  .nav {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .navLink {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .navLink:hover {
+    color: #007bff;
+  }
+  
+  .darkModeToggle {
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="checkbox"] {
+    margin-left: 10px;
+  }
+  
+  /* Dark Mode Styles */
+  .darkMode {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  .darkMode .header {
+    background-color: #1e1e1e;
+  }
+  
+  .darkMode .navLink {
+    color: #ddd;
+  }
+  
+  .darkMode .navLink:hover {
+    color: #66b2ff;
+  }
+  

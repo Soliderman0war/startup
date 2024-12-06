@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Signup.module.css";
 import { useNavigate } from "react-router-dom";
+import Header from "./components/Header";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -27,14 +28,9 @@ const Signup = () => {
       return;
     }
 
-    // Simulate API call to store data (replace with actual API call later)
+    
     try {
-      // Example POST request to send signup data to backend
-      // await fetch("https://your-api-url.com/signup", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ username, email, password }),
-      // });
+      // Do database or API
 
       // Simulate success
       setSuccessMessage("Signup successful! Redirecting...");
@@ -47,12 +43,7 @@ const Signup = () => {
 
   return (
     <div className={styles.signupContainer}>
-      <header className={styles.header}>
-        <nav className={styles.nav}>
-          <a href="/" className={styles.navLink}>Home</a>
-          <a href="/login" className={styles.navLink}>Login</a>
-        </nav>
-      </header>
+      <Header />
       <main className={styles.main}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <h2>Sign up</h2>

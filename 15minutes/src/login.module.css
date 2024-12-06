@@ -5,8 +5,13 @@ body {
   margin: 0;
 }
 
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
 .header {
-  width: 99%;
+  width: 98%;
   display: flex;
   justify-content: space-between;
   padding: 10px;
