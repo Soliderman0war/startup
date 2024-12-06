@@ -5,10 +5,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 900, 
-      activityCount: 0, 
+      timer: 900, // Initial timer in seconds (15 minutes)
+      activityCount: 0, // Number of completed activities
+      selectedActivity: null, // Randomly selected activity
     };
     this.intervalId = null;
+    this.activities = ["Chess", "Juggling", "Future Options with Third Party"];
   }
 
   componentDidMount() {
@@ -16,7 +18,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalId); 
+    clearInterval(this.intervalId); // Clean up interval when component unmounts
   }
 
   startTimer = () => {
@@ -25,7 +27,7 @@ class Home extends Component {
         if (prevState.timer > 0) {
           return { timer: prevState.timer - 1 };
         } else {
-          clearInterval(this.intervalId); 
+          clearInterval(this.intervalId); // Stop timer when it reaches 0
           return { timer: 0 };
         }
       });
@@ -46,23 +48,40 @@ class Home extends Component {
     }));
   };
 
+  handleRandomize = () => {
+    const randomIndex = Math.floor(Math.random() * this.activities.length);
+    const randomActivity = this.activities[randomIndex];
+    this.setState({ selectedActivity: randomActivity });
+  };
+
+  handleConfirmActivity = () => {
+    const { selectedActivity } = this.state;
+    if (selectedActivity) {
+      alert(`Activity "${selectedActivity}" confirmed! (API call simulated)`);
+      this.setState({ selectedActivity: null });
+    }
+  };
+
   render() {
-    const { timer, activityCount } = this.state;
+    const { timer, activityCount, selectedActivity } = this.state;
 
     return (
       <div className={styles.container}>
         <header className={styles.header}>
           <div className={styles.logo}>Logo</div>
           <nav className={styles.nav}>
-            <a href="/" className={styles.navLink}>
-              Home
-            </a>
-            <a href="/login" className={styles.navLink}>
-              Login
-            </a>
-            <a href="/signup" className={styles.navLink}>
-              Signup
-            </a>
+          <a href="/" className={styles.navLink}>
+            Home
+          </a>
+          <a href="/login" className={styles.navLink}>
+            Login
+          </a>
+          <a href="/signup" className={styles.navLink}>
+            Signup
+          </a>
+          <a href="/about" className={styles.navLink}>
+            About
+          </a>
           </nav>
           <div className={styles.darkModeToggle}>
             <label htmlFor="darkMode">Dark Mode</label>
@@ -76,19 +95,23 @@ class Home extends Component {
           </div>
         </header>
 
-        <div className={styles.container}>
-          <div className={styles.dropdown}>
-            <select>
-              <option>Select</option>
-              <option>Chess</option>
-              <option>Juggling</option>
-              <option>Future Options with Third Party</option>
-            </select>
-          </div>
-          <div className={styles.activitySpace}>
-            <p>Space for Activity to show (e.g., YouTube video, game, etc.)</p>
-          </div>
-
+        <div className={styles.mainContent}>
+          {selectedActivity ? (
+            <div className={styles.selectedActivity}>
+              <h2>{selectedActivity}</h2>
+              <p>Confirm?</p>
+              <button
+                className={styles.button}
+                onClick={this.handleConfirmActivity}
+              >
+                Confirm
+              </button>
+            </div>
+          ) : (
+            <p className={styles.activityPrompt}>
+              Click "Randomize" to select an activity.
+            </p>
+          )}
           <div className={styles.buttons}>
             <button
               className={styles.button}
@@ -96,8 +119,9 @@ class Home extends Component {
             >
               Completed Activity
             </button>
-            <button className={styles.button}>Randomize</button>
-            <button className={styles.button}>Confirm Activity 3rd Party Caller</button>
+            <button className={styles.button} onClick={this.handleRandomize}>
+              Randomize
+            </button>
           </div>
         </div>
 
