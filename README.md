@@ -65,5 +65,5 @@ For this deliverable I used JavaScript and React to have the application work fo
      - [x] Completed Activity Count - Completed Activity Button will increase count, this will be implemented with Websocket in order to get a correct number across all users.
      - [x] Buttons to call API - The randomizer and the confirm activty will cause the buttons to call that API but for now it just randomizes which activity to call.
      - [x] Timer - 15 minutes timer in top right counting down.
- - [x] Router - Routing between Login, Signup, and Activity Components
+ - [x] Router - Routing between Login, Signup, Activity, and About Components
  - [x] Hooks - Home page uses class properties instead of useState or useEffect to track changes in activity state.
