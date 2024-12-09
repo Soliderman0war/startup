@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./About.module.css";
 import Header from "./components/Header";
-import Activities from './components/Activities';
+import Activities from "./components/activities";
 
 const About = () => {
   return (
@@ -25,9 +25,14 @@ const About = () => {
         </p>
       </main>
 
+
       <div>
-      <Activities />
-    </div> 
+      <h1>Your Activities</h1>
+      <Activities /> 
+      </div>
+
+
+
       <script src="darkmode.js"></script>
     </div>
   );

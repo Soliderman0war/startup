@@ -71,6 +71,9 @@ class Home extends Component {
             <a href="/signup" className={styles.navLink}>
               Signup
             </a>
+            <a href="/about" className={styles.navLink}>
+              About
+            </a>
           </nav>
           <div className={styles.highestCount}>
             <label>Completed Activities: {activityCount}</label>
