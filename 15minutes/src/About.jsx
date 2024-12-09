@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./About.module.css";
 import Header from "./components/Header";
+import Activities from './components/Activities';
+
 const About = () => {
   return (
     
@@ -23,6 +25,9 @@ const About = () => {
         </p>
       </main>
 
+      <div>
+      <Activities />
+    </div> 
       <script src="darkmode.js"></script>
     </div>
   );
