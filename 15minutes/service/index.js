@@ -1,5 +1,5 @@
-const express = require('express');
-const uuid = require('uuid');
+import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
 const app = express();
 
 let users = {};
@@ -50,7 +50,7 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 // Add a completed activity
-apiRouter.post('/activity', (req, res) => {
+apiRouter.post('/api/activities', (req, res) => {
   const user = Object.values(users).find((u) => u.token === req.body.token);
   if (user) {
     const userActivities = activities[user.email] || [];
@@ -63,7 +63,7 @@ apiRouter.post('/activity', (req, res) => {
 });
 
 // Get completed activities
-apiRouter.get('/activities', (req, res) => {
+apiRouter.get('/api/activities', (req, res) => {
   const user = Object.values(users).find((u) => u.token === req.query.token);
   if (user) {
     res.send(activities[user.email] || []);
