@@ -5,7 +5,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 900,
+      timer: 900, 
       activityCount: 0,
       currentActivity: null,
       activityLog: [],
@@ -24,7 +24,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerInterval);
+    clearInterval(this.timerInterval); 
   }
 
   formatTime(seconds) {
