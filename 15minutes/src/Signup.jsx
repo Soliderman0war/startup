@@ -29,7 +29,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/create', {
+      const response = await fetch('https://startup.15minutes.click/api/auth/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

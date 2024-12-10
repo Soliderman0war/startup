@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./About.module.css";
 import Header from "./components/Header";
-// import Activities from "./components/activities";
+import Activities from "./components/activities";
 
 const About = () => {
-  const [activityLog, setActivityLog] = useState([]);
-  // const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const log = JSON.parse(localStorage.getItem("activityLog")) || [];
-    setActivityLog(log);
-  }, []);
-
   return (
     <div className={styles.container}>
       <Header />
@@ -32,16 +24,8 @@ const About = () => {
       </main>
 
       <div>
-      <h1>Logged Activities</h1>
-        {activityLog.length ? (
-          <ul>
-            {activityLog.map((activity, index) => (
-              <li key={index}>{activity}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>No activities logged yet.</p>
-        )}
+      <h1>Your Activities</h1>
+        <Activities />
       </div>
     </div>
   );

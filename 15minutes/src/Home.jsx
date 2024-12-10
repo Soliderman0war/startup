@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Home.module.css";
+import Activities from "./components/activities";
 
 class Home extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class Home extends Component {
 
     if (randomActivity.type === "crossword") {
       this.setState({
-        crosswordLink: "https://www.wsj.com/crosswords",
+        crosswordLink: "https://www.wsj.com/news/puzzle",
         currentActivity: "Wall Street Journal Crossword",
       });
     }
@@ -89,17 +90,50 @@ class Home extends Component {
     }));
   };
 
-  handleConfirmActivity = () => {
-    const previousLog = JSON.parse(localStorage.getItem("activityLog")) || [];
+  handleConfirmActivity = async () => {
     const { currentActivity } = this.state;
   
     if (currentActivity) {
-      const updatedActivityLog = [...previousLog, currentActivity];
-      localStorage.setItem("activityLog", JSON.stringify(updatedActivityLog));
-      this.setState({ activityLog: updatedActivityLog }); // Update state as well
-      alert(`Activity confirmed: ${currentActivity}`);
+      try {
+        const token = localStorage.getItem("authToken");
+        // console.log(token);
+  
+        if (!token) {
+          alert("You are not logged in.");
+          return;
+        }
+  
+        const response = await fetch("https://startup.15minutes.click/api/activity", { // Fixed the URL
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({ activity: currentActivity }),
+        });
+  
+        if (!response.ok) {
+          const errorResponse = await response.json();
+          throw new Error(errorResponse.msg || "Failed to log activity");
+        }
+  
+        const result = await response.json();
+        console.log("Backend response: ", result);
+  
+        alert(`Activity confirmed: ${currentActivity}`);
+        this.setState({ 
+          activityLog: [...this.state.activityLog, currentActivity] 
+        });
+      } catch (error) {
+        console.error("Error during Backend call:", error);
+        alert("Failed to log activity.");
+      }
+    } else {
+      alert("No activity to confirm.");
     }
   };
+  
+  
 
   handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -107,6 +141,7 @@ class Home extends Component {
   };
 
   render() {
+    const { activityLog } = this.state;
     const isLoggedIn = !!localStorage.getItem("authToken");
     const { timer, youtubeVideoLink, crosswordLink, activityCount, currentActivity } = this.state;
 
@@ -202,6 +237,8 @@ class Home extends Component {
             </div>
           </div>
         </main>
+
+        {/* <Activities activities={activityLog} /> */}
 
         <footer className={styles.footer}>
           <p>

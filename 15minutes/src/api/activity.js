@@ -24,11 +24,13 @@ export async function getActivities() {
 }
 
 export async function completeActivity(activity) {
+  const token = localStorage.getItem("authToken");
   try {
     const response = await fetch(`${API_BASE_URL}/api/activity`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: token, 
       },
       body: JSON.stringify(activity),
     });

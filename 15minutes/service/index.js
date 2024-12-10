@@ -29,20 +29,25 @@ app.use('/api', apiRouter);
 
 function authenticateUser(req, res, next) {
   const token = req.headers["authorization"];
-  console.log("Received token:", token);
+  console.log("Received token from frontend:", token);
+
   if (!token) {
     return res.status(401).send({ msg: "Authorization token missing" });
   }
 
+  console.log("Stored tokens on server:", Object.values(users).map(u => u.token));
+
   const user = Object.values(users).find((u) => u.token === token);
+
   if (!user) {
+    console.error("Token did not match any user.");
     return res.status(401).send({ msg: "Invalid token" });
   }
 
   req.user = user;
+  console.log("User authenticated:", user);
   next();
 }
-
 
 apiRouter.post('/auth/create', (req, res) => {
   const user = users[req.body.email];
