@@ -28,16 +28,29 @@ const Signup = () => {
       return;
     }
 
-    
     try {
-      // Do database or API
+      const response = await fetch('http://localhost:3000/api/auth/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const result = await response.json();
 
-      // Simulate success
-      setSuccessMessage("Signup successful! Redirecting...");
-      setErrorMessage("");
-      setTimeout(() => navigate("/login"), 2000); // Redirect to login page after 2 seconds
+      if (response.ok) {
+        setSuccessMessage("Signup successful! Redirecting...");
+        setErrorMessage("");
+        setTimeout(() => navigate("/login"), 1000); 
+      } else {
+        setErrorMessage(result.msg || "Signup failed. Please try again.");
+      }
     } catch (error) {
-      setErrorMessage("An error occurred. Please try again.");
+      console.error("Error during signup:", error);
+      setErrorMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -55,7 +68,6 @@ const Signup = () => {
             placeholder="Username"
             value={formData.username}
             onChange={handleInputChange}
-            required
             className={styles.input}
           />
           <input

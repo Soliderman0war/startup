@@ -2,6 +2,7 @@ const express = require('express');
 const uuid = require('uuid');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 
 let users = {};
 let activities = {};
@@ -9,7 +10,7 @@ let activities = {};
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-
+app.options('*', cors());
 app.use(express.json());
 app.use(express.static('public'));
 
@@ -47,7 +48,7 @@ apiRouter.post('/auth/create', (req, res) => {
 
   const newUser = { email: req.body.email, password: req.body.password, token: uuid.v4() };
   users[newUser.email] = newUser;
-  activities[newUser.email] = []; // Initialize user's activity array
+  activities[newUser.email] = []; 
 
   res.send({ token: newUser.token });
 });
