@@ -67,3 +67,12 @@ For this deliverable I used JavaScript and React to have the application work fo
      - [x] Timer - 15 minutes timer in top right counting down.
  - [x] Router - Routing between Login, Signup, Activity, and About Components
  - [x] Hooks - Home page uses class properties instead of useState or useEffect to track changes in activity state.
+
+
+## Service deliverable
+For this deliverable I added backend endpoints that collects the activity data and displays all activties completed and call to a third-party API
+ - [x]  Node.js/Express HTTP service - done!
+ - [x]  Static middleware for frontend - done!
+ - [x] Calls to third party endpoints - randomizer calls youtube API when it gets chess or juggling
+ - [x] Backend service endpoints - Placeholders for login that stores the current user on the server. Endpoints for activities.
+ - [x]  Frontend calls service endpoints - I did this using the fetch function. (example on about page, catching the activities)

@@ -1,4 +1,3 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 export async function getActivities() {
   const token = localStorage.getItem("authToken");
@@ -6,7 +5,7 @@ export async function getActivities() {
     throw new Error("No authentication token found");
   }
 
-  const response = await fetch(`${API_BASE_URL}/api/activity`, {
+  const response = await fetch(`https://startup.15minutes.click/api/activity`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +25,7 @@ export async function getActivities() {
 export async function completeActivity(activity) {
   const token = localStorage.getItem("authToken");
   try {
-    const response = await fetch(`${API_BASE_URL}/api/activity`, {
+    const response = await fetch(`https://startup.15minutes.click/api/activity`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
