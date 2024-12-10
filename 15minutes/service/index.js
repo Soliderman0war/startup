@@ -10,14 +10,17 @@ let activities = {};
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-app.options('*', cors());
+
+// const corsOptions = {
+//   origin: 'https://startup.15minutes.click',
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// };
+
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
-});
 
 
 const apiRouter = express.Router();
@@ -25,17 +28,18 @@ app.use('/api', apiRouter);
 
 
 function authenticateUser(req, res, next) {
-  const token = req.headers['authorization'];
+  const token = req.headers["authorization"];
+  console.log("Received token:", token);
   if (!token) {
-    return res.status(401).send({ msg: 'Authorization token missing' });
+    return res.status(401).send({ msg: "Authorization token missing" });
   }
 
   const user = Object.values(users).find((u) => u.token === token);
   if (!user) {
-    return res.status(401).send({ msg: 'Invalid token' });
+    return res.status(401).send({ msg: "Invalid token" });
   }
 
-  req.user = user; 
+  req.user = user;
   next();
 }
 
@@ -93,6 +97,9 @@ apiRouter.get('/activity', authenticateUser, (req, res) => {
   res.status(200).send(activities[userEmail] || []);
 });
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

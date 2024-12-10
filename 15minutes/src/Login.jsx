@@ -19,16 +19,12 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
-      if (response.status === 409) {
-        setErrorMessage('Email already registered. Please log in.');
-        return;
-      }
-
+  
       const result = await response.json();
-      
+  
       if (response.ok) {
         setErrorMessage("");
+        localStorage.setItem("authToken", result.token); 
         alert("Logged in successfully!");
         navigate("/"); 
       } else {
@@ -38,6 +34,11 @@ const Login = () => {
       console.error("Error during login:", error);
       setErrorMessage("Something went wrong. Please try again.");
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // Clear the token from local storage
+    navigate("/login"); // Redirect to the login page
   };
 
   return (

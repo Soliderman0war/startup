@@ -4,15 +4,17 @@ import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 import About from "./About";
-
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/signup" element={<PrivateRoute>
+        <Signup /> </PrivateRoute>} />
+      <Route path="/about" element={<PrivateRoute>
+        <About /> </PrivateRoute>} />
     </Routes>
   );
 };
