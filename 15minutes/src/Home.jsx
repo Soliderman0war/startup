@@ -8,6 +8,7 @@ class Home extends Component {
       timer: 900,
       activityCount: 0,
       currentActivity: null,
+      activityLog: [],
     };
   }
 
@@ -24,6 +25,29 @@ class Home extends Component {
     clearInterval(this.timerInterval);
   }
 
+  fetchChessTutorial = async () => {
+    try {
+      const response = await fetch("https://api.chess.com/pub/puzzle/random");
+      
+      console.log("API response status:", response.status);
+      
+      if (!response.ok) {
+        throw new Error("Failed to fetch chess tutorial");
+      }
+
+      const data = await response.json();
+      console.log("Fetched data:", data);
+
+      if (data && data.name) {
+        this.setState({ currentActivity: data.name });
+      } else {
+        console.error("No valid activity data found in response");
+      }
+    } catch (error) {
+      console.error("Error fetching chess tutorial:", error);
+    }
+  };
+
   formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -35,32 +59,33 @@ class Home extends Component {
   handleCompleteActivity = () => {
     this.setState((prevState) => ({
       activityCount: prevState.activityCount + 1,
+      currentActivity: null, // Clear the current activity
     }));
   };
 
   handleRandomize = () => {
-    const activities = ["Chess", "Juggling", "Meditation"];
-    const randomActivity =
-      activities[Math.floor(Math.random() * activities.length)];
-    this.setState({ currentActivity: randomActivity });
+    console.log("Fetching chess tutorial...");
+    this.fetchChessTutorial();
   };
 
   handleConfirmActivity = () => {
-    const { currentActivity } = this.state;
+    const { currentActivity, activityLog } = this.state;
     if (currentActivity) {
-      alert(`Confirmed activity: ${currentActivity}`);
-      this.setState({ currentActivity: null });
+      // Add the current activity to the log list
+      const updatedLog = [...activityLog, currentActivity];
+      this.setState({
+        activityLog: updatedLog,
+        currentActivity: null, // Clear the current activity
+      });
     }
   };
 
-
   render() {
-    const { timer, activityCount, currentActivity, isDarkMode } = this.state;
+    const { timer, activityCount, currentActivity, activityLog } = this.state;
 
     return (
-      <div className={isDarkMode ? styles.darkContainer : styles.container}>
+      <div className={styles.container}>
         <header className={styles.header}>
-          
           <nav className={styles.nav}>
             <a href="/" className={styles.navLink}>
               Home
@@ -112,6 +137,15 @@ class Home extends Component {
               Completed Activity
             </button>
           </div>
+          
+          <div className={styles.logSection}>
+            <h3>Activity Log</h3>
+            <ul>
+              {activityLog.map((activity, index) => (
+                <li key={index}>{activity}</li>
+              ))}
+            </ul>
+          </div>
         </main>
 
         <footer className={styles.footer}>
@@ -125,8 +159,7 @@ class Home extends Component {
             >
               GitHub
             </a>
-            .
-            <a title="time icons">Time icons created by Freepik - Flaticon</a>
+            . Time icons created by Freepik - Flaticon
           </p>
         </footer>
       </div>
