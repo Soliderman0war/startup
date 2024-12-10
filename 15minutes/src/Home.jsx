@@ -5,7 +5,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: 900, 
+      timer: 900, // 15 minutes in seconds
       activityCount: 0,
       currentActivity: null,
       activityLog: [],
@@ -24,7 +24,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerInterval); 
+    clearInterval(this.timerInterval);
   }
 
   formatTime(seconds) {
@@ -34,15 +34,15 @@ class Home extends Component {
   }
 
   fetchVideo = async (query) => {
-    const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
-  
+    const apiKey = "AIzaSyDIDlwzne_p68Rj_V_m1Nqg34iHA16nMUU";
+
     try {
       const response = await fetch(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
           query
         )}&type=video&key=${apiKey}`
       );
-  
+
       const data = await response.json();
       if (data.items && data.items.length > 0) {
         const videoId = data.items[0]?.id?.videoId;
@@ -56,7 +56,6 @@ class Home extends Component {
       console.error("Error fetching YouTube video:", error);
     }
   };
-  
 
   handleRandomize = async () => {
     const activities = [
