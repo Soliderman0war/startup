@@ -90,13 +90,24 @@ class Home extends Component {
   };
 
   handleConfirmActivity = () => {
+    const previousLog = JSON.parse(localStorage.getItem("activityLog")) || [];
     const { currentActivity } = this.state;
+  
     if (currentActivity) {
-      alert(`Confirmed activity: ${currentActivity}`);
+      const updatedActivityLog = [...previousLog, currentActivity];
+      localStorage.setItem("activityLog", JSON.stringify(updatedActivityLog));
+      this.setState({ activityLog: updatedActivityLog }); // Update state as well
+      alert(`Activity confirmed: ${currentActivity}`);
     }
   };
 
+  handleLogout = () => {
+    localStorage.removeItem("authToken");
+    window.location.reload(); 
+  };
+
   render() {
+    const isLoggedIn = !!localStorage.getItem("authToken");
     const { timer, youtubeVideoLink, crosswordLink, activityCount, currentActivity } = this.state;
 
     return (
@@ -106,12 +117,22 @@ class Home extends Component {
             <a href="/" className={styles.navLink}>
               Home
             </a>
+            {!localStorage.getItem("authToken") && (
+            <>
             <a href="/login" className={styles.navLink}>
-              Login
+             Login
             </a>
             <a href="/signup" className={styles.navLink}>
-              Signup
+             Signup
             </a>
+            </>
+             )}
+
+            {isLoggedIn && (
+              <button className={styles.logoutButton} onClick={this.handleLogout}>
+                Logout
+              </button>
+            )}
             <a href="/about" className={styles.navLink}>
               About
             </a>

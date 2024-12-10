@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./About.module.css";
 import Header from "./components/Header";
-import Activities from "./components/activities";
+// import Activities from "./components/activities";
 
 const About = () => {
+  const [activityLog, setActivityLog] = useState([]);
+  // const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const log = JSON.parse(localStorage.getItem("activityLog")) || [];
+    setActivityLog(log);
+  }, []);
+
   return (
-    
     <div className={styles.container}>
-      
       <Header />
       <main className={styles.main}>
         <h1>About 15 Minutes</h1>
         <p>
           Many people in their lives want to change or improve. However, they
-          don't know how to start or sometimes even what to start on. 
-          </p>
-          <p>
+          don't know how to start or sometimes even what to start on.
+        </p>
+        <p>
           I am creating a website that selects an activity to do in
           15 minutes to improve slightly each day. People can sign in and
           utilize it as they keep track of what they improved on, as well as
@@ -25,15 +31,18 @@ const About = () => {
         </p>
       </main>
 
-
       <div>
-      <h1>Your Activities</h1>
-      <Activities /> 
+      <h1>Logged Activities</h1>
+        {activityLog.length ? (
+          <ul>
+            {activityLog.map((activity, index) => (
+              <li key={index}>{activity}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>No activities logged yet.</p>
+        )}
       </div>
-
-
-
-      <script src="darkmode.js"></script>
     </div>
   );
 };
