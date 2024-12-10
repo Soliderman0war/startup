@@ -9,6 +9,8 @@ class Home extends Component {
       activityCount: 0,
       currentActivity: null,
       activityLog: [],
+      youtubeVideoLink: null,
+      crosswordLink: null,
     };
   }
 
@@ -25,63 +27,78 @@ class Home extends Component {
     clearInterval(this.timerInterval);
   }
 
-  fetchChessTutorial = async () => {
-    try {
-      const response = await fetch("https://api.chess.com/pub/puzzle/random");
-      
-      console.log("API response status:", response.status);
-      
-      if (!response.ok) {
-        throw new Error("Failed to fetch chess tutorial");
-      }
-
-      const data = await response.json();
-      console.log("Fetched data:", data);
-
-      if (data && data.name) {
-        this.setState({ currentActivity: data.name });
-      } else {
-        console.error("No valid activity data found in response");
-      }
-    } catch (error) {
-      console.error("Error fetching chess tutorial:", error);
-    }
-  };
-
   formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${minutes.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
+    return `${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   }
 
-  handleCompleteActivity = () => {
-    this.setState((prevState) => ({
-      activityCount: prevState.activityCount + 1,
-      currentActivity: null, // Clear the current activity
-    }));
+  fetchVideo = async (query) => {
+    const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
+  
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+          query
+        )}&type=video&key=${apiKey}`
+      );
+  
+      const data = await response.json();
+      if (data.items && data.items.length > 0) {
+        const videoId = data.items[0]?.id?.videoId;
+        if (videoId) {
+          this.setState({ youtubeVideoLink: `https://www.youtube.com/embed/${videoId}` });
+        } else {
+          console.error("No valid video ID found.");
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching YouTube video:", error);
+    }
   };
+  
 
-  handleRandomize = () => {
-    console.log("Fetching chess tutorial...");
-    this.fetchChessTutorial();
-  };
+  handleRandomize = async () => {
+    const activities = [
+      { query: "Levy Rozman Beginner Chess Tutorial", type: "youtube" },
+      { query: "Beginner's Guide to Juggling", type: "youtube" },
+      { query: "Wall Street Journal Crossword", type: "crossword" },
+    ];
 
-  handleConfirmActivity = () => {
-    const { currentActivity, activityLog } = this.state;
-    if (currentActivity) {
-      // Add the current activity to the log list
-      const updatedLog = [...activityLog, currentActivity];
+    const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+
+    if (randomActivity.type === "youtube") {
+      await this.fetchVideo(randomActivity.query);
+      this.setState({ currentActivity: randomActivity.query });
+    }
+
+    if (randomActivity.type === "crossword") {
       this.setState({
-        activityLog: updatedLog,
-        currentActivity: null, // Clear the current activity
+        crosswordLink: "https://www.wsj.com/crosswords",
+        currentActivity: "Wall Street Journal Crossword",
       });
     }
   };
 
+  handleCompleteActivity = () => {
+    this.setState((prevState) => ({
+      activityCount: prevState.activityCount + 1,
+      activityLog: [...prevState.activityLog, this.state.currentActivity],
+      currentActivity: null,
+      youtubeVideoLink: null,
+      crosswordLink: null,
+    }));
+  };
+
+  handleConfirmActivity = () => {
+    const { currentActivity } = this.state;
+    if (currentActivity) {
+      alert(`Confirmed activity: ${currentActivity}`);
+    }
+  };
+
   render() {
-    const { timer, activityCount, currentActivity, activityLog } = this.state;
+    const { timer, youtubeVideoLink, crosswordLink, activityCount, currentActivity } = this.state;
 
     return (
       <div className={styles.container}>
@@ -110,41 +127,59 @@ class Home extends Component {
 
         <main className={styles.main}>
           <div className={styles.activitySection}>
-            {currentActivity ? (
-              <div className={styles.activityDisplay}>
-                <p>Current Activity: {currentActivity}</p>
-                <button
-                  className={styles.confirmButton}
-                  onClick={this.handleConfirmActivity}
-                >
-                  Confirm Activity
-                </button>
+            {youtubeVideoLink && (
+              <div className={styles.videoSection}>
+                <iframe
+                  width="560"
+                  height="315"
+                  src={youtubeVideoLink}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
-            ) : (
+            )}
+
+            {crosswordLink && (
+              <div className={styles.crosswordSection}>
+                <a
+                  href={crosswordLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.crosswordLink}
+                >
+                  Go to Wall Street Journal Crossword
+                </a>
+              </div>
+            )}
+
+            <div className={styles.buttonSection}>
               <button
                 className={styles.randomizeButton}
                 onClick={this.handleRandomize}
               >
-                Randomize Activity
+                Randomize Activity (Chess, Juggling, Crossword)
               </button>
-            )}
-          </div>
-          <div className={styles.buttonSection}>
-            <button
-              className={styles.button}
-              onClick={this.handleCompleteActivity}
-            >
-              Completed Activity
-            </button>
-          </div>
-          
-          <div className={styles.logSection}>
-            <h3>Activity Log</h3>
-            <ul>
-              {activityLog.map((activity, index) => (
-                <li key={index}>{activity}</li>
-              ))}
-            </ul>
+              {currentActivity && (
+                <div>
+                  <p>Current Activity: {currentActivity}</p>
+                  <button
+                    className={styles.confirmButton}
+                    onClick={this.handleConfirmActivity}
+                  >
+                    Confirm Activity
+                  </button>
+                </div>
+              )}
+
+              <button
+                className={styles.button}
+                onClick={this.handleCompleteActivity}
+              >
+                Completed Activity
+              </button>
+            </div>
           </div>
         </main>
 
@@ -159,7 +194,7 @@ class Home extends Component {
             >
               GitHub
             </a>
-            . Time icons created by Freepik - Flaticon
+            . Time icons created by Freepik - Flaticon.
           </p>
         </footer>
       </div>
